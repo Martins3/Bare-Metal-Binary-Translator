@@ -1,0 +1,46 @@
+%---------------------------------------------------------------------------%
+%->> Frontmatter
+%---------------------------------------------------------------------------%
+%-
+%-> 生成封面
+%-
+\maketitle% 生成中文封面
+\MAKETITLE% 生成英文封面
+%-
+%-> 作者声明
+%-
+\makedeclaration% 生成声明页
+%-
+%-> 中文摘要
+%-
+\intobmk\chapter*{摘\quad 要}% 显示在书签但不显示在目录
+\setcounter{page}{1}% 开始页码
+\pagenumbering{Roman}% 页码符号
+一个指令集架构是否能够成功，不仅仅取决于其性能和功耗，能否成功构建软件生态也是关键的一环。系统级二进制翻译器可以在宿主机上运行未经修改的客户机操作系统系统，是消除指令集架构壁垒，构建其指令集生态的关键方法。但是，主流的系统级二进制翻译器大都运行在宿主操作系统上，只能间接的访问硬件资源，因此导致了难以逾越的性能瓶颈。
+
+论文研究裸金属二进制翻译器（Bare Metal Binary Translator，简称 BMBT），可以将二进制翻译器直接运行在裸机中，而不是宿主机的操作系统上。因此，BMBT 可以直接访问并且管理所有的硬件资源，例如 TLB 和 PCI 配置空间，能够更好地提升系统级二进制翻译器的性能。
+论文的主要工作和贡献如下：
+\begin{enumerate}
+	\item 设计并实现了直接运行于裸机的系统级二进制翻译器，BMBT，大幅提升了二进制翻译的性能。在 SPEC CPU2000 的定点和浮点测试，BMBT 分别存在 21\% 和 35\% 的提升。
+	\item 在设备虚拟化方面，BMBT 通过设备直通让客户机操作系统可以直接访问硬件资源, 消除了设备模拟开销。BMBT 提出了设备中断的模拟和注入在同一个 CPU 上的执行模型，为消除额外的中断标志位检测指令提供了可能。在 fio 的写测试中，BMBT 取得了189.23\% 的提升。
+	\item 在访存优化方面，利用处理器提供的直接映射窗口消除所有的 TLB 不命中，并通过混合物理页面分配器减少物理页面碎片化。memcpy 测试显示，BMBT 有28.67\% 性能提升。
+\end{enumerate}
+
+上述研究成果已在自主 LoongArch 指令系统平台上得到了应用。
+
+\keywords{跨架构，系统级二进制翻译器，裸金属二进制翻译器}% 中文关键词
+\intobmk\chapter*{Abstract}% 显示在书签但不显示在目录
+The success of an instruction set architecture depends not only on its performance and power consumption, but the success of building a software ecosystem is also a key component. System-level binary translators, which can run unmodified client OS systems on the host, are a key way to remove the instruction set architecture barriers and build its instruction set ecosystem. However, most mainstream system-level binary translators run on the host OS and can only access hardware resources indirectly, thus leading to insurmountable performance bottlenecks.
+
+The paper investigates Bare Metal Binary Translator (BMBT), which can run the binary translator directly in the bare metal machine instead of on the host OS. Therefore, BMBT can directly access and manage all hardware resources, such as TLB and PCI configuration space, which can better improve the performance of system-level binary translators.
+The main work and contributions of the paper are as follows.
+\begin{enumerate}
+	\item Designed and implemented BMBT, a system-level binary translation that runs directly on bare metal and significantly improves the performance of binary translation. In SPEC CPU2000 fixed-point and floating-point tests, BMBT has 21\% and 35\% improvement respectively.
+	\item In terms of device virtualization, BMBT eliminates the device emulation overhead by giving the client OS direct access to hardware resources through device passthrough. BMBT proposes an execution model where device interrupts are emulated and injected on the same CPU, providing the possibility to eliminate additional interrupt flag bit detection instructions. In fio write tests, BMBT achieves a 189.23\% improvement.
+	\item In terms of memory access optimization, the direct mapping window provided by the processor is used to eliminate all TLB misses and to reduce physical page fragmentation by mixing physical page allocators. memcpy tests show that BMBT has a 28.67\% performance improvement.
+\end{enumerate}
+
+The above research results have been applied on the independent LoongArch instruction system platform.
+
+\KEYWORDS{cross-ISA, system level binary translation, BMBT}% 英文关键词
+%---------------------------------------------------------------------------%
